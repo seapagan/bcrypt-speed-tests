@@ -14,15 +14,51 @@ on your target hardware.
 - Python 3.9+
 - `bcrypt` (installed via project dependencies)
 
-## Install
+## Install & Run from PyPI
+
+Install uv first: <https://docs.astral.sh/uv/>
+
+Preferred install with uv as a global tool:
 
 ```bash
+uv tool install bcrypt-speed-tests
+```
+
+Run directly without installing:
+
+```bash
+uvx bcrypt-speed-tests
+```
+
+Add it to an existing project as a development dependency:
+
+```bash
+uv add bcrypt_speed_tests
+```
+
+Alternative installs:
+
+```bash
+pipx install bcrypt-speed-tests
+```
+
+```bash
+pip install bcrypt-speed-tests
+```
+
+## Install from repo
+
+Clone and install locally:
+
+```bash
+git clone https://github.com/seapagan/bcrypt-speed-tests.git
+cd bcrypt-speed-tests
 uv sync
 ```
 
 `uv sync` creates a local `.venv` by default.
 
-## Activate virtual environment
+### Activate the virtual environment
 
 ```bash
 source .venv/bin/activate
