@@ -64,7 +64,7 @@ poe format
 
 ## Configure
 
-Edit constants in `src/bcrypt_speed_tests/__init__.py`:
+Edit constants in `src/bcrypt_speed_tests/benchmark.py`:
 
 - `ITERATIONS`: hashes per cost factor
 - `COSTS`: cost factor range

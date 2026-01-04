@@ -3,31 +3,24 @@ name = "bcrypt-speed-tests"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-authors = [
-    { name = "Grant Ramsay", email = "seapagan@gmail.com" }
-]
+authors = [{ name = "Grant Ramsay", email = "seapagan@gmail.com" }]
 requires-python = ">=3.9"
-dependencies = [
-    "bcrypt>=5.0.0",
-]
+dependencies = ["bcrypt>=5.0.0"]
 
 [project.scripts]
-bcrypt-speed-tests = "bcrypt_speed_tests:main"
+bcrypt-speed-tests = "bcrypt_speed_tests.main:main"
 
 [build-system]
 requires = ["uv_build>=0.9.20,<0.10.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = [
-    "mypy>=1.19.1",
-    "poethepoet>=0.37.0",
-    "ruff>=0.14.10",
-]
+dev = ["mypy>=1.19.1", "poethepoet>=0.37.0", "ruff>=0.14.10"]
 
 [tool.ruff]
 line-length = 80
 target-version = "py39"
+src = ["src"]
 
 [tool.ruff.lint]
 select = ["ALL"]
