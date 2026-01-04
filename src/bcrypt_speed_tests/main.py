@@ -20,7 +20,6 @@ def _resolve_costs(costs: list[int] | None) -> list[int]:
 
 @app.callback(invoke_without_command=True)
 def run(
-    ctx: typer.Context,
     iterations: Annotated[
         int,
         typer.Option(
@@ -42,8 +41,6 @@ def run(
     ] = None,
 ) -> None:
     """Run the benchmark and print a timing table."""
-    if ctx.invoked_subcommand is not None:
-        return
     selected_costs = _resolve_costs(costs)
     print(f"Iterations per cost: {iterations}\n")
     print(f"{'Cost':>4} | {'Avg time (ms)':>12}")
@@ -56,4 +53,4 @@ def run(
 
 def main() -> None:
     """Run the CLI application."""
-    app()
+    app()  # pragma: no cover

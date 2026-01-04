@@ -12,7 +12,7 @@ on your target hardware.
 
 ## Requirements
 
-- Python 3.9+
+- Python 3.10+
 - `bcrypt` (installed via project dependencies)
 
 ## Install & Run from PyPI
@@ -124,6 +124,18 @@ Cost | Avg time (ms)
   12 |        93.1
   13 |       185.7
   14 |       370.9
+```
+
+## Development
+
+Common dev commands (run after `uv sync`):
+
+```bash
+poe ruff       # lint
+poe mypy       # type-check
+poe format     # format
+poe test       # run tests
+poe test-watch # watch tests
 ```
 
 ## License

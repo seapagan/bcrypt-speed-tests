@@ -12,16 +12,16 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Security",
     "Topic :: System :: Benchmark",
 ]
 authors = [{ name = "Grant Ramsay", email = "seapagan@gmail.com" }]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = ["bcrypt>=5.0.0", "typer>=0.12.0"]
 
 [project.urls]
@@ -37,21 +37,74 @@ requires = ["uv_build>=0.9.20,<0.10.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = ["mypy>=1.19.1", "poethepoet>=0.37.0", "ruff>=0.14.10"]
+dev = [
+    "mock>=5.2.0",
+    "mypy>=1.19.1",
+    "poethepoet>=0.37.0",
+    "pytest>=8.4.2",
+    "pytest-clarity>=1.0.1",
+    "pytest-cov>=7.0.0",
+    "pytest-mock>=3.15.1",
+    "pytest-randomly>=4.0.1",
+    "pytest-sugar>=1.1.1",
+    "pytest-watcher>=0.6.2",
+    "ruff>=0.14.10",
+]
 
 [tool.ruff]
 line-length = 80
-target-version = "py39"
+target-version = "py310"
 src = ["src"]
+
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "double"
 
 [tool.ruff.lint]
 select = ["ALL"]
+per-file-ignores = { "tests/*.py" = ["PLR2004", "S101"] }
+extend-ignore = [
+    "COM812", # ignored for ruff formatting
+    "ISC001", # ignored for ruff formatting
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 strict = true
+exclude = "^\\.venv/"
 
 [tool.poe.tasks]
 ruff = "ruff check ."
 format = "ruff format ."
-mypy = "mypy src"
+mypy = "mypy ."
+test = "pytest"
+test-watch = "ptw tests"
+
+[tool.pytest.ini_options]
+addopts = [
+    "-m",
+    "not rewrite",  # mark tests 'rewrite' that need work, and they wont be run
+    "--cov",
+    "--cov-report",
+    "term-missing",
+    "--cov-report",
+    "html",
+]
+filterwarnings = []
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "rewrite: Tests need Rewriting",
+]
+testpaths = ["tests"]
+mock_use_standalone_module = true
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*"]
