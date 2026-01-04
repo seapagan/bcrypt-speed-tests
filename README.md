@@ -1,6 +1,7 @@
 # bcrypt-speed-tests
 
-Small CLI for benchmarking bcrypt cost factors so you can pick a sensible value
+Small CLI for benchmarking bcrypt cost factors (rounds) so you can pick a
+sensible value
 on your target hardware.
 
 ## What it does
@@ -100,8 +101,8 @@ Run the benchmark and print a timing table.
 Options:
   --iterations  -i  INTEGER RANGE [x>=1]      Hashes to run per cost factor.
                                               [default: 3]
-  --cost        -c  INTEGER RANGE [4<=x<=31]  Cost factor(s). Repeat to pass
-                                              multiple values.
+  --cost        -c  INTEGER RANGE [4<=x<=31]  Cost factor(s)/rounds. Repeat to
+                                              pass multiple values.
   --help                                     Show this message and exit.
 ```
 
@@ -126,7 +127,7 @@ poe format
 Edit defaults in `src/bcrypt_speed_tests/benchmark.py`:
 
 - `ITERATIONS`: hashes per cost factor
-- `COSTS`: cost factor range
+- `COSTS`: bcrypt rounds (cost factor) range
 - `PASSWORD`: fixed input
 
 ## Example output
