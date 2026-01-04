@@ -12,16 +12,16 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Security",
     "Topic :: System :: Benchmark",
 ]
 authors = [{ name = "Grant Ramsay", email = "seapagan@gmail.com" }]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = ["bcrypt>=5.0.0", "typer>=0.12.0"]
 
 [project.urls]
@@ -53,18 +53,30 @@ dev = [
 
 [tool.ruff]
 line-length = 80
-target-version = "py39"
+target-version = "py310"
 src = ["src"]
+
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "double"
 
 [tool.ruff.lint]
 select = ["ALL"]
 per-file-ignores = { "tests/*.py" = ["PLR2004", "S101"] }
+extend-ignore = [
+    "COM812", # ignored for ruff formatting
+    "ISC001", # ignored for ruff formatting
+]
+
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [tool.ruff.lint.pyupgrade]
 keep-runtime-typing = true
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 strict = true
 exclude = "^\\.venv/"
 

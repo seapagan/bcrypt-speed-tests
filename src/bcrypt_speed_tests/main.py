@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 # ruff: noqa: T201
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 
@@ -12,7 +12,7 @@ from .benchmark import COSTS, ITERATIONS, benchmark_cost
 app = typer.Typer(add_completion=False)
 
 
-def _resolve_costs(costs: Optional[list[int]]) -> list[int]:
+def _resolve_costs(costs: list[int] | None) -> list[int]:
     if costs:
         return list(costs)
     return list(COSTS)
@@ -31,7 +31,7 @@ def run(
         ),
     ] = ITERATIONS,
     costs: Annotated[
-        Optional[list[int]],
+        list[int] | None,
         typer.Option(
             "--cost",
             "-c",

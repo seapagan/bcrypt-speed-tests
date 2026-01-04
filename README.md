@@ -12,7 +12,7 @@ on your target hardware.
 
 ## Requirements
 
-- Python 3.9+
+- Python 3.10+
 - `bcrypt` (installed via project dependencies)
 
 ## Install & Run from PyPI
