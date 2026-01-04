@@ -68,7 +68,6 @@ extend-ignore = [
     "ISC001", # ignored for ruff formatting
 ]
 
-
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
@@ -83,7 +82,7 @@ exclude = "^\\.venv/"
 [tool.poe.tasks]
 ruff = "ruff check ."
 format = "ruff format ."
-mypy = "mypy src"
+mypy = "mypy ."
 test = "pytest"
 test-watch = "ptw tests"
 
