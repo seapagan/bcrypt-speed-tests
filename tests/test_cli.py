@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
-from unittest.mock import patch
+from typing import TYPE_CHECKING
 
 import pytest
 from typer.testing import CliRunner
 
 from bcrypt_speed_tests.main import app
+
+if TYPE_CHECKING:
+    from pytest_mock import MockerFixture
 
 
 @pytest.fixture
@@ -16,16 +19,17 @@ def runner() -> CliRunner:
     return CliRunner()
 
 
-def test_cli_defaults_use_configured_costs(runner: CliRunner) -> None:
+def test_cli_defaults_use_configured_costs(
+    runner: CliRunner, mocker: MockerFixture
+) -> None:
     """Render the default table using the configured costs."""
-    with (
-        patch("bcrypt_speed_tests.main.COSTS", [4, 5]),
-        patch(
-            "bcrypt_speed_tests.main.benchmark_cost",
-            side_effect=lambda cost, _iterations: 0.01 * cost,
-        ),
-    ):
-        result = runner.invoke(app, [])
+    mocker.patch("bcrypt_speed_tests.main.COSTS", [4, 5])
+    mocker.patch(
+        "bcrypt_speed_tests.main.benchmark_cost",
+        side_effect=lambda cost, _iterations: 0.01 * cost,
+    )
+
+    result = runner.invoke(app, [])
 
     assert result.exit_code == 0
     assert "Iterations per cost: 3" in result.output
@@ -33,7 +37,9 @@ def test_cli_defaults_use_configured_costs(runner: CliRunner) -> None:
     assert "   5 |" in result.output
 
 
-def test_cli_custom_options_override_defaults(runner: CliRunner) -> None:
+def test_cli_custom_options_override_defaults(
+    runner: CliRunner, mocker: MockerFixture
+) -> None:
     """Use CLI options to override costs and iterations."""
     calls: list[tuple[int, int]] = []
 
@@ -41,13 +47,14 @@ def test_cli_custom_options_override_defaults(runner: CliRunner) -> None:
         calls.append((cost, iterations))
         return 0.001
 
-    with patch(
+    mocker.patch(
         "bcrypt_speed_tests.main.benchmark_cost", side_effect=fake_benchmark
-    ):
-        result = runner.invoke(
-            app,
-            ["--iterations", "2", "--cost", "10", "--cost", "12"],
-        )
+    )
+
+    result = runner.invoke(
+        app,
+        ["--iterations", "2", "--cost", "10", "--cost", "12"],
+    )
 
     assert result.exit_code == 0
     assert calls == [(10, 2), (12, 2)]
