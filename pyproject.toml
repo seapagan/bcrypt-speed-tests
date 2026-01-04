@@ -68,6 +68,8 @@ strict = true
 ruff = "ruff check ."
 format = "ruff format ."
 mypy = "mypy src"
+test = "pytest"
+test-watch = "ptw tests"
 
 [tool.pytest.ini_options]
 addopts = [

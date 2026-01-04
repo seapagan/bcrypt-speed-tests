@@ -126,6 +126,18 @@ Cost | Avg time (ms)
   14 |       370.9
 ```
 
+## Development
+
+Common dev commands (run after `uv sync`):
+
+```bash
+poe ruff       # lint
+poe mypy       # type-check
+poe format     # format
+poe test       # run tests
+poe test-watch # watch tests
+```
+
 ## License
 
 MIT
