@@ -37,7 +37,19 @@ requires = ["uv_build>=0.9.20,<0.10.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = ["mypy>=1.19.1", "poethepoet>=0.37.0", "ruff>=0.14.10"]
+dev = [
+    "mock>=5.2.0",
+    "mypy>=1.19.1",
+    "poethepoet>=0.37.0",
+    "pytest>=8.4.2",
+    "pytest-clarity>=1.0.1",
+    "pytest-cov>=7.0.0",
+    "pytest-mock>=3.15.1",
+    "pytest-randomly>=4.0.1",
+    "pytest-sugar>=1.1.1",
+    "pytest-watcher>=0.6.2",
+    "ruff>=0.14.10",
+]
 
 [tool.ruff]
 line-length = 80
@@ -55,3 +67,26 @@ strict = true
 ruff = "ruff check ."
 format = "ruff format ."
 mypy = "mypy src"
+
+[tool.pytest.ini_options]
+addopts = [
+    "-m",
+    "not rewrite",  # mark tests 'rewrite' that need work, and they wont be run
+    "--cov",
+    "--cov-report",
+    "term-missing",
+    "--cov-report",
+    "html",
+]
+filterwarnings = []
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "rewrite: Tests need Rewriting",
+]
+testpaths = ["tests"]
+mock_use_standalone_module = true
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*"]

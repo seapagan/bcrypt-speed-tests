@@ -10,6 +10,9 @@ wheels/
 .venv
 .envrc
 
+#testing
+.coverage
+
 # AI Agent stuff
 CLAUDE.md
 AGENTS.md
