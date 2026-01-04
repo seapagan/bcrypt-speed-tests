@@ -1,6 +1,6 @@
 [project]
 name = "bcrypt-speed-tests"
-version = "0.1.0"
+version = "0.2.0"
 description = "CLI for benchmarking bcrypt cost factors on local hardware."
 readme = "README.md"
 license = { text = "MIT" }
