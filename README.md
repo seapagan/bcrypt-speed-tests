@@ -112,24 +112,6 @@ Override defaults at runtime:
 bcrypt-speed-tests --iterations 5 --cost 10 --cost 12 --cost 14
 ```
 
-## Tasks
-
-Run via poethepoet:
-
-```bash
-poe ruff
-poe mypy
-poe format
-```
-
-## Configure
-
-Edit defaults in `src/bcrypt_speed_tests/benchmark.py`:
-
-- `ITERATIONS`: hashes per cost factor
-- `COSTS`: bcrypt rounds (cost factor) range
-- `PASSWORD`: fixed input
-
 ## Example output
 
 ```pre
