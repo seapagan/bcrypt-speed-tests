@@ -58,6 +58,7 @@ src = ["src"]
 
 [tool.ruff.lint]
 select = ["ALL"]
+per-file-ignores = { "tests/*.py" = ["PLR2004", "S101"] }
 
 [tool.mypy]
 python_version = "3.9"
