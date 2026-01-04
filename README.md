@@ -52,6 +52,29 @@ pip install -e .
 bcrypt-speed-tests
 ```
 
+### CLI options
+
+Available options:
+
+```text
+Usage: bcrypt-speed-tests [OPTIONS] COMMAND [ARGS]...
+
+Run the benchmark and print a timing table.
+
+Options:
+  --iterations  -i  INTEGER RANGE [x>=1]      Hashes to run per cost factor.
+                                              [default: 3]
+  --cost        -c  INTEGER RANGE [4<=x<=31]  Cost factor(s). Repeat to pass
+                                              multiple values.
+  --help                                     Show this message and exit.
+```
+
+Override defaults at runtime:
+
+```bash
+bcrypt-speed-tests --iterations 5 --cost 10 --cost 12 --cost 14
+```
+
 ## Tasks
 
 Run via poethepoet:
@@ -64,7 +87,7 @@ poe format
 
 ## Configure
 
-Edit constants in `src/bcrypt_speed_tests/benchmark.py`:
+Edit defaults in `src/bcrypt_speed_tests/benchmark.py`:
 
 - `ITERATIONS`: hashes per cost factor
 - `COSTS`: cost factor range
