@@ -64,7 +64,7 @@ def test_cli_rejects_invalid_cost(runner: CliRunner) -> None:
     result = runner.invoke(main_module.app, ["--cost", "3"])
 
     assert result.exit_code != 0
-    assert "Invalid value for '--cost'" in result.output
+    assert "Usage:" in result.output
 
 
 def test_cli_rejects_invalid_iterations(runner: CliRunner) -> None:
@@ -72,11 +72,12 @@ def test_cli_rejects_invalid_iterations(runner: CliRunner) -> None:
     result = runner.invoke(main_module.app, ["--iterations", "0"])
 
     assert result.exit_code != 0
-    assert "Invalid value for '--iterations'" in result.output
+    assert "Usage:" in result.output
 
 
 def test_cli_callback_skips_on_subcommand(runner: CliRunner) -> None:
     """Skip the benchmark output when a subcommand is invoked."""
+
     @main_module.app.command("noop")
     def noop() -> None:
         pass

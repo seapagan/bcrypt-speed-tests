@@ -60,9 +60,13 @@ src = ["src"]
 select = ["ALL"]
 per-file-ignores = { "tests/*.py" = ["PLR2004", "S101"] }
 
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true
+
 [tool.mypy]
 python_version = "3.9"
 strict = true
+exclude = "^\\.venv/"
 
 [tool.poe.tasks]
 ruff = "ruff check ."
